@@ -23,3 +23,11 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #374151;
 }
+
+button {
+    cursor: pointer;
+}
+
+a, button, input, textarea, select{
+    outline: none;
+}
