@@ -1,16 +1,14 @@
-
 import React from 'react';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { SocketProvider } from './src/providers/SocketProvider';
-import { PageLayout } from './components/layout/PageLayout';
-import { Home } from './src/pages/Home/Home';
-import { Dashboard } from './src/pages/Dashboard/Dashboard';
-import { BattleRoom } from './src/pages/BattleRoom/BattleRoom';
-import { Profile } from './src/pages/Profile/Profile';
-import { Leaderboard } from './src/pages/Leaderboard/Leaderboard';
-import { Results } from './src/pages/Results/Results';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { SocketProvider } from '@/providers/SocketProvider';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { Home } from '@/pages/Home/Home';
+import { Dashboard } from '@/pages/Dashboard/Dashboard';
+import { BattleRoom } from '@/pages/BattleRoom/BattleRoom';
+import { Profile } from '@/pages/Profile/Profile';
+import { Leaderboard } from '@/pages/Leaderboard/Leaderboard';
+import { Results } from '@/pages/Results/Results';
 
-// Placeholder components for auth
 const PlaceholderPage = ({ name }: { name: string }) => (
   <div className="pt-24 px-6 text-center">
     <h1 className="text-3xl font-bold">{name} Page</h1>
@@ -21,9 +19,8 @@ const PlaceholderPage = ({ name }: { name: string }) => (
 const App: React.FC = () => {
   return (
     <SocketProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
-          {/* Main Layout Routes */}
           <Route path="/" element={<PageLayout />}>
             <Route index element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
@@ -34,13 +31,12 @@ const App: React.FC = () => {
             <Route path="register" element={<PlaceholderPage name="Register" />} />
           </Route>
 
-          {/* Special Immersive Routes (No Global Navbar) */}
           <Route path="/battle/:roomId" element={<BattleRoom />} />
           <Route path="/spectate/:roomId" element={<BattleRoom />} />
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </SocketProvider>
   );
 };
